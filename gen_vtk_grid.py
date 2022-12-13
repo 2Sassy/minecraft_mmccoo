@@ -10,19 +10,13 @@ ymin = -800
 ymax =  500
 
 for x in range(xmin,xmax, 16*4):
-    lines.append("2 {} {}".format(len(points), len(points)+1))
+    lines.append(f"2 {len(points)} {len(points) + 1}")
 
-    points.append("{} 0 {}".format(x, ymin))
-    points.append("{} 0 {}".format(x, ymax))
-
-
+    points.extend((f"{x} 0 {ymin}", f"{x} 0 {ymax}"))
 for y in range(ymin,ymax, 16*4):
-    lines.append("2 {} {}".format(len(points), len(points)+1))
+    lines.append(f"2 {len(points)} {len(points) + 1}")
 
-    points.append("{} 0 {}".format(xmin, y))
-    points.append("{} 0 {}".format(xmax, y))
-
-
+    points.extend((f"{xmin} 0 {y}", f"{xmax} 0 {y}"))
 #for y in range(ymin, ymax, 50):
 
 
@@ -32,13 +26,13 @@ print("3D triangulation data")
 print("ASCII")
 print("")
 print("DATASET POLYDATA")
-print("POINTS {} float".format(len(points)))
+print(f"POINTS {len(points)} float")
 
 for pt in points:
     print(pt)
 
 
-print("LINES {} {}".format(len(lines), len(lines)*3))
+print(f"LINES {len(lines)} {len(lines) * 3}")
 
 for line in lines:
     print(line)
